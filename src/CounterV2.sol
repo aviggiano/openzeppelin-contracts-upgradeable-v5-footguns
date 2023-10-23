@@ -5,8 +5,9 @@ import "@openzeppelin/contracts-upgradeable/access/Ownable2StepUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
-contract Counter is Initializable, Ownable2StepUpgradeable, UUPSUpgradeable {
+contract CounterV2 is Initializable, Ownable2StepUpgradeable, UUPSUpgradeable {
     uint256 public number;
+    uint256 public multiplier;
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -22,8 +23,16 @@ contract Counter is Initializable, Ownable2StepUpgradeable, UUPSUpgradeable {
         number = newNumber;
     }
 
+    function setMultiplier(uint256 newmultiplier) public {
+        multiplier = newmultiplier;
+    }
+
     function increment() public {
         number++;
+    }
+
+    function multiply() public {
+        number *= multiplier;
     }
 
     function _authorizeUpgrade(address newImplementation)
